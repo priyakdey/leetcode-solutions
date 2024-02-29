@@ -56,8 +56,8 @@ class Solution:
                 cloned_head = node
                 iter2 = cloned_head
             else:
-                iter2.next = node
-                iter2 = iter2.next
+                iter2.next = node  # type: ignore
+                iter2 = iter2.next  # type: ignore
 
             old_node_to_new_node_map[iter1] = node
             iter1 = iter1.next
@@ -67,9 +67,9 @@ class Solution:
         while iter1 is not None:
             random_ptr = iter1.random
             if random_ptr is not None:
-                iter2.random = old_node_to_new_node_map[random_ptr]
+                iter2.random = old_node_to_new_node_map[random_ptr]  # type: ignore
 
             iter1 = iter1.next
-            iter2 = iter2.next
+            iter2 = iter2.next  # type: ignore
 
         return cloned_head

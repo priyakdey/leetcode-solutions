@@ -7,7 +7,7 @@ consecutive elements sequence.
 You must write an algorithm that runs in O(n) time.
 """
 
-from typing import List
+from typing import List, Set
 
 
 class Solution:
@@ -16,18 +16,22 @@ class Solution:
             return len(nums)
 
         max_streak = 0
-        num_set = set()
+        visited: Set[int] = set(nums)
 
         for num in nums:
-            num_set.add(num)
+            if num in visited:
+                visited.remove(num)
 
-        for num in nums:
-            if num - 1 not in num_set:
-                curr_num = num
-                streak = 0
-                while curr_num in num_set:
-                    streak += 1
-                    curr_num += 1
-                max_streak = max(max_streak, streak)
+                left = num - 1
+                while left in visited:
+                    visited.remove(left)
+                    left -= 1
+
+                right = num + 1
+                while right in visited:
+                    visited.remove(right)
+                    right += 1
+
+                max_streak = max(max_streak, (right - 1) - (left + 1) + 1)
 
         return max_streak

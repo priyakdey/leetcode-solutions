@@ -4,7 +4,7 @@
 Given the head of a linked list, return the list after sorting it in ascending order.
 """
 
-from typing import Optional, cast
+from typing import Optional
 
 from model import ListNode
 
