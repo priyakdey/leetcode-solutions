@@ -49,7 +49,6 @@ class Trie:
         longest_prefix: List[str] = []
         while curr is not None and len(curr.children) == 1 and curr.is_word is False:
             for ch, node in curr.children.items():
-                # TODO: only 1 should be present. There must be a better way to unpack dict_keys
                 longest_prefix.append(ch)
                 curr = node
         return "".join(longest_prefix)
