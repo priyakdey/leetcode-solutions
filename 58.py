@@ -10,17 +10,18 @@ A word is a maximal substring consisting of non-space characters only.
 
 class Solution:
     def lengthOfLastWord(self, s: str) -> int:
-        last_word_length = 0
-        buffer = []
+        length = 0
+        current_length = 0
         for ch in s:
-            if ch != " ":
-                buffer.append(ch)
+            if ch.isspace():
+                if current_length != 0:
+                    length = current_length
+                current_length = 0
             else:
-                if len(buffer) != 0:
-                    last_word_length = len(buffer)
-                    buffer = []
+                current_length += 1
+        
+        if current_length != 0:
+            length = current_length
+        
+        return length
 
-        if len(buffer) != 0:
-            last_word_length = len(buffer)
-
-        return last_word_length
