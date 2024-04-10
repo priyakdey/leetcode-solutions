@@ -10,20 +10,19 @@
  * @param {Function} fn
  * @return {Array}
  */
-var sortBy = function (arr, fn) {
-  const compareFn = (a, b) => {
-    const aValue = fn(a), bValue = fn(b);
-    if (aValue === bValue) {
-      return 0;
+var sortBy = function(arr, fn) {
+    const compareFn = (a, b) => {
+        const aValue = fn(a),
+            bValue = fn(b);
+        if (aValue === bValue) {
+            return 0;
+        } else if (aValue <= bValue) {
+            return -1;
+        } else {
+            return 1;
+        }
     }
-    else if (aValue <= bValue) {
-      return -1;
-    }
-    else {
-      return 1;
-    }
-  }
 
-  arr.sort(compareFn);
-  return arr;
+    arr.sort(compareFn);
+    return arr;
 };

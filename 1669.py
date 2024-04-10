@@ -9,12 +9,13 @@ place.
 Build the result list and return its head.
 """
 
-
 from model import ListNode
 
 
 class Solution:
-    def mergeInBetween(self, list1: ListNode, a: int, b: int, list2: ListNode) -> ListNode:
+    def mergeInBetween(
+        self, list1: ListNode, a: int, b: int, list2: ListNode
+    ) -> ListNode:
         a_th_node, b_th_node = None, None
 
         curr = list1

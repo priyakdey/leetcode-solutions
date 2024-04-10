@@ -12,6 +12,7 @@ The following rules define a valid string:
   parenthesis '(' or an empty string "".
 """
 
+
 class Solution:
     def checkValidString(self, s: str) -> bool:
         left_balance = 0
@@ -22,10 +23,10 @@ class Solution:
                 left_balance -= 1
             if left_balance < 0:
                 return False
-        
+
         if left_balance == 0:
             return True
-        
+
         right_balance = 0
         for char in reversed(s):
             if char in ")*":
@@ -34,6 +35,5 @@ class Solution:
                 right_balance -= 1
             if right_balance < 0:
                 return False
-        
-        return True
 
+        return True

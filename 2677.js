@@ -15,18 +15,18 @@
  * @param {number} size
  * @return {Array}
  */
-var chunk = function (arr, size) {
-  const length = arr.length;
-  const chunkCount =
-    Math.floor(arr.length / size) + (arr.length % size !== 0 ? 1 : 0);
-  const chunks = new Array(chunkCount);
+var chunk = function(arr, size) {
+    const length = arr.length;
+    const chunkCount =
+        Math.floor(arr.length / size) + (arr.length % size !== 0 ? 1 : 0);
+    const chunks = new Array(chunkCount);
 
-  let cursor = 0;
+    let cursor = 0;
 
-  for (let i = 0; i < chunkCount; i++) {
-    chunks[i] = arr.slice(cursor, Math.min(cursor + size, length));
-    cursor = cursor + size;
-  }
+    for (let i = 0; i < chunkCount; i++) {
+        chunks[i] = arr.slice(cursor, Math.min(cursor + size, length));
+        cursor = cursor + size;
+    }
 
-  return chunks;
+    return chunks;
 };

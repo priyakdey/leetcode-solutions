@@ -19,9 +19,8 @@ class Solution:
                 current_length = 0
             else:
                 current_length += 1
-        
+
         if current_length != 0:
             length = current_length
-        
-        return length
 
+        return length

@@ -21,8 +21,11 @@ from model import ListNode
 
 
 class Solution:
-    def splitCircularLinkedList(self, list: Optional[ListNode]) -> List[Optional[ListNode]]:
-        if list is None: return [None]
+    def splitCircularLinkedList(
+        self, list: Optional[ListNode]
+    ) -> List[Optional[ListNode]]:
+        if list is None:
+            return [None]
 
         tail = self.find_tail(list)
         tail.next = None
@@ -33,13 +36,12 @@ class Solution:
         tail.next = head2
         return [head1, head2]
 
-
     def find_mid(self, head: ListNode) -> ListNode:
         mid, curr = head, head.next
         while curr is not None and curr.next is not None:
             mid = mid.next
             curr = curr.next.next
-        
+
         return mid
 
     def find_tail(self, head: ListNode) -> ListNode:
@@ -48,8 +50,5 @@ class Solution:
         while tail.next not in visited:
             visited.add(tail)
             tail = tail.next
-        
+
         return tail
-
-
-

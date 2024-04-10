@@ -19,17 +19,17 @@
  * @param {Function} fn
  * @return {Object}
  */
-Array.prototype.groupBy = function (fn) {
-  return this.reduce((acc, curr) => {
-    const key = fn(curr);
+Array.prototype.groupBy = function(fn) {
+    return this.reduce((acc, curr) => {
+        const key = fn(curr);
 
-    if (!acc[key]) {
-      acc[key] = [];
-    }
+        if (!acc[key]) {
+            acc[key] = [];
+        }
 
-    acc[key].push(curr);
-    return acc;
-  }, {});
+        acc[key].push(curr);
+        return acc;
+    }, {});
 };
 
 /**

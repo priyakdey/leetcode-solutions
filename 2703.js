@@ -6,6 +6,6 @@
 /**
  * @return {number}
  */
-var argumentsLength = function (...args) {
-  return args?.length ?? 0;
+var argumentsLength = function(...args) {
+    return args?.length ?? 0;
 };

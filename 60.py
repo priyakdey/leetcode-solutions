@@ -15,7 +15,6 @@ sequence for n = 3:
 Given n and k, return the kth permutation sequence.
 """
 
-
 from typing import List
 
 

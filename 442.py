@@ -13,7 +13,6 @@ extra space.
 from typing import List
 
 
-
 class Solution:
     def findDuplicates(self, nums: List[int]) -> List[int]:
         duplicates: List[int] = []
@@ -25,4 +24,3 @@ class Solution:
                 nums[num - 1] *= -1
 
         return duplicates
-

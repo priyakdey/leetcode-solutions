@@ -10,7 +10,6 @@ with support for '?' and '*' where:
 The matching should cover the entire input string (not partial).
 """
 
-
 from typing import List, Optional
 
 

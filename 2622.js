@@ -12,13 +12,13 @@
 //   Otherwise it should return -1.
 // - count(): returns the count of un-expired keys.
 
-var Value = function (value, timeoutId) {
-  this.value = value;
-  this.timeoutId = timeoutId;
+var Value = function(value, timeoutId) {
+    this.value = value;
+    this.timeoutId = timeoutId;
 };
 
-var TimeLimitedCache = function () {
-  this.table = new Map();
+var TimeLimitedCache = function() {
+    this.table = new Map();
 };
 
 /**
@@ -27,37 +27,37 @@ var TimeLimitedCache = function () {
  * @param {number} duration time until expiration in ms
  * @return {boolean} if un-expired key already existed
  */
-TimeLimitedCache.prototype.set = function (key, value, duration) {
-  let isKeyPresent = false;
+TimeLimitedCache.prototype.set = function(key, value, duration) {
+    let isKeyPresent = false;
 
-  if (this.table.has(key)) {
-    clearTimeout(this.table.get(key).timeoutId);
-    this.table.delete(key);
-    isKeyPresent = true;
-  }
+    if (this.table.has(key)) {
+        clearTimeout(this.table.get(key).timeoutId);
+        this.table.delete(key);
+        isKeyPresent = true;
+    }
 
-  this.table.set(key, new Value(value, -1));
-  const timeoutId = setTimeout(() => this.table.delete(key), duration);
-  this.table.get(key).timeoutId = timeoutId;
+    this.table.set(key, new Value(value, -1));
+    const timeoutId = setTimeout(() => this.table.delete(key), duration);
+    this.table.get(key).timeoutId = timeoutId;
 
-  return isKeyPresent;
+    return isKeyPresent;
 };
 
 /**
  * @param {number} key
  * @return {number} value associated with key
  */
-TimeLimitedCache.prototype.get = function (key) {
-  if (this.table.has(key)) {
-    return this.table.get(key).value;
-  }
+TimeLimitedCache.prototype.get = function(key) {
+    if (this.table.has(key)) {
+        return this.table.get(key).value;
+    }
 
-  return -1;
+    return -1;
 };
 
 /**
  * @return {number} count of non-expired keys
  */
-TimeLimitedCache.prototype.count = function () {
-  return this.table.size;
+TimeLimitedCache.prototype.count = function() {
+    return this.table.size;
 };

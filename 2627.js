@@ -20,22 +20,22 @@
  * @param {number} t milliseconds
  * @return {Function}
  */
-var debounce = function (fn, t) {
+var debounce = function(fn, t) {
 
-  let timeoutId = undefined;
+    let timeoutId = undefined;
 
-  return function (...args) {
-    if (timeoutId) {
-      clearTimeout(timeoutId);
+    return function(...args) {
+        if (timeoutId) {
+            clearTimeout(timeoutId);
+        }
+
+        timeoutId = setTimeout(() => fn.call(null, ...args), t);
     }
-
-    timeoutId = setTimeout(() => fn.call(null, ...args), t);
-  }
 };
 
 /**
-* const log = debounce(console.log, 100);
-* log('Hello'); // cancelled
-* log('Hello'); // cancelled
-* log('Hello'); // Logged at t=100ms
-*/
+ * const log = debounce(console.log, 100);
+ * log('Hello'); // cancelled
+ * log('Hello'); // cancelled
+ * log('Hello'); // Logged at t=100ms
+ */

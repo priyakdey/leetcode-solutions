@@ -18,7 +18,6 @@ Implement the FileSystem class:
   returns -1 if the path doesn't exist.
 """
 
-
 from typing import Dict, List
 
 

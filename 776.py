@@ -18,9 +18,12 @@ Return an array of the two roots of the two subtrees.
 from typing import List, Optional
 from model import TreeNode
 
+# TODO: complete this
+
 
 class Solution:
-    def splitBST(self, root: Optional[TreeNode], target: int) -> List[Optional[TreeNode]]:
-        
-    
-   
+
+    def splitBST(
+        self, root: Optional[TreeNode], target: int
+    ) -> List[Optional[TreeNode]]:
+        pass

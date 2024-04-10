@@ -8,10 +8,9 @@
  * @param {number} n
  * @return {Function} Counter
  */
-var createCounter = function (n) {
+var createCounter = function(n) {
     var counter = n;
     return function() {
         return counter++;
     };
 };
-

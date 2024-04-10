@@ -34,5 +34,3 @@ class Solution:
                 curr_depth -= 1
 
         return max_depth
-
-

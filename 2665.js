@@ -25,4 +25,3 @@ var createCounter = function(init) {
     };
 
 };
-

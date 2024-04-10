@@ -16,13 +16,13 @@
  * @param {number} t
  * @return {Function}
  */
-var cancellable = function (fn, args, t) {
+var cancellable = function(fn, args, t) {
     fn(...args);
     // the fn function will be run every t ms
     const intervalId = setInterval(() => fn(...args), t);
 
     // handler to cancel the fn function after cancelTimeInMs ms.
-    return function (cancelTimeInMs) {
+    return function(cancelTimeInMs) {
         setTimeout(() => clearInterval(intervalId), cancelTimeInMs);
     }
 

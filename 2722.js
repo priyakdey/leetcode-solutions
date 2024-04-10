@@ -22,37 +22,40 @@
  * @param {Array} arr2
  * @return {Array}
  */
-var join = function (arr1, arr2) {
-  const map = new Map();
+var join = function(arr1, arr2) {
+    const map = new Map();
 
-  for (let item of arr1) {
-    map.set(item.id, item);
-  }
-
-  for (let item of arr2) {
-    let id = item.id;
-    if (map.has(id)) {
-      map.set(id, { ...map.get(id), ...item });
-    } else {
-      map.set(id, item);
+    for (let item of arr1) {
+        map.set(item.id, item);
     }
-  }
 
-  const mergedArr = new Array(map.size);
-  let cursor = 0;
-  for (let item of map.values()) {
-    mergedArr[cursor++] = item;
-  }
-
-  mergedArr.sort((obj1, obj2) => {
-    if (obj1.id < obj2.id) {
-      return -1;
-    } else if (obj1.id === obj2.id) {
-      return 0;
-    } else {
-      return 1;
+    for (let item of arr2) {
+        let id = item.id;
+        if (map.has(id)) {
+            map.set(id, {
+                ...map.get(id),
+                ...item
+            });
+        } else {
+            map.set(id, item);
+        }
     }
-  });
 
-  return mergedArr;
+    const mergedArr = new Array(map.size);
+    let cursor = 0;
+    for (let item of map.values()) {
+        mergedArr[cursor++] = item;
+    }
+
+    mergedArr.sort((obj1, obj2) => {
+        if (obj1.id < obj2.id) {
+            return -1;
+        } else if (obj1.id === obj2.id) {
+            return 0;
+        } else {
+            return 1;
+        }
+    });
+
+    return mergedArr;
 };

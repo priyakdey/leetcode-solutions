@@ -7,7 +7,6 @@ once in the list and delete the nodes that have any of those values.
 Return the linked list after the deletions.
 """
 
-
 from typing import Dict
 from model import ListNode
 
