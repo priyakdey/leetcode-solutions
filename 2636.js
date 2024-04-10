@@ -23,7 +23,7 @@
  * @param {number} n
  * @return {Promise<any>}
  */
-var promisePool = async function (functions, n) {
+var promisePool = async function(functions, n) {
     async function evaluateNext() {
         if (functions.length === 0) return;
         const fn = functions.shift();

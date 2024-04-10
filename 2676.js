@@ -21,7 +21,7 @@
  * @param {number} t
  * @return {Function}
  */
-var throttle = function (fn, t) {
+var throttle = function(fn, t) {
     let timeoutInProgress = null;
     let argsToProcess = null;
 
