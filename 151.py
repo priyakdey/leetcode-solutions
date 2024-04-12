@@ -13,7 +13,6 @@ two words. The returned string should only have a single space separating the
 words. Do not include any extra spaces.
 """
 
-
 from typing import List
 
 

@@ -17,7 +17,7 @@
  * @param {number} startIndex
  * @yields {number}
  */
-var cycleGenerator = function* (arr, startIndex) {
+var cycleGenerator = function*(arr, startIndex) {
     const length = arr.length;
     let index = startIndex % length;
 
