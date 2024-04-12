@@ -10,8 +10,9 @@
 /**
  * @return {Generator<number>}
  */
-var fibGenerator = function* () {
-    let curr = 0, next = 1;
+var fibGenerator = function*() {
+    let curr = 0,
+        next = 1;
     while (true) {
         yield curr
         const temp = curr;

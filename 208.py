@@ -16,24 +16,24 @@ Trie() Initializes the trie object.
   inserted string word that has the prefix prefix, and false otherwise.
 """
 
-from typing import List, Optional
+from typing import List, Optional, cast
 
 
 class Trie:
 
     def __init__(self):
-        self.root: Node = Node("")
+        self.root: Node = Node()
 
     def insert(self, word: str) -> None:
         if word == "":
             return
 
-        curr: Node = self.root
+        curr = self.root
         for ch in word:
             index = ord(ch) - 97
             if curr.children[index] is None:
-                curr.children[index] = Node(ch)
-            curr = curr.children[index]  # type: ignore
+                curr.children[index] = Node()
+            curr = cast(Node, curr.children[index])
 
         curr.end = True
 
@@ -41,12 +41,12 @@ class Trie:
         if word == "":
             return False
 
-        curr: Node = self.root
+        curr = self.root
         for ch in word:
             index = ord(ch) - 97
             if curr.children[index] is None:
                 return False
-            curr = curr.children[index]  # type: ignore
+            curr = cast(Node, curr.children[index])
 
         return curr.end
 
@@ -54,19 +54,18 @@ class Trie:
         if prefix is None:
             return True
 
-        curr: Node = self.root
+        curr = self.root
         for ch in prefix:
             index = ord(ch) - 97
             if curr.children[index] is None:
                 return False
-            curr = curr.children[index]  # type: ignore
+            curr = cast(Node, curr.children[index])
 
         return True
 
 
 class Node:
 
-    def __init__(self, ch: str):
-        self.ch = ch
+    def __init__(self):
         self.children: List[Optional[Node]] = [None for _ in range(26)]
         self.end = False

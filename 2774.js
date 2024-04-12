@@ -10,9 +10,10 @@
  * @param {number} target
  * @return {number}
  */
-Array.prototype.upperBound = function (target) {
+Array.prototype.upperBound = function(target) {
     let index = -1;
-    let left = 0, right = this.length - 1;
+    let left = 0,
+        right = this.length - 1;
 
     while (left <= right) {
         const mid = left + Math.floor((right - left) / 2);

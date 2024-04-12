@@ -22,12 +22,14 @@
  * @param {number} colsCount
  * @return {Array<Array<number>>}
  */
-Array.prototype.snail = function (rowsCount, colsCount) {
+Array.prototype.snail = function(rowsCount, colsCount) {
     if (rowsCount * colsCount !== this.length) {
         return [];
     }
 
-    const matrix = Array.from({ length: rowsCount },
+    const matrix = Array.from({
+            length: rowsCount
+        },
         () => new Array(colsCount).fill(undefined));
     let cursor = 0;
     let isGoingDown = true;

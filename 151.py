@@ -14,19 +14,23 @@ words. Do not include any extra spaces.
 """
 
 
+from typing import List
+
+
 class Solution:
     def reverseWords(self, s: str) -> str:
-        stack = []
-        buffer = []
+        buffer: List[str] = []
+        buf0: List[str] = []
+
         for ch in s:
-            if ch != " ":
-                buffer.append(ch)
+            if ch == " ":
+                if len(buf0) != 0:
+                    buffer.insert(0, "".join(buf0))
+                    buf0.clear()
             else:
-                if len(buffer) != 0:
-                    stack.insert(0, "".join(buffer))
-                    buffer = []
+                buf0.append(ch)
 
-        if len(buffer) != 0:
-            stack.insert(0, "".join(buffer))
+        if len(buf0) != 0:
+            buffer.insert(0, "".join(buf0))
 
-        return " ".join(stack)
+        return " ".join(buffer)
