@@ -15,6 +15,7 @@ A leaf node is a node with no children.
 from typing import Optional
 from model import TreeNode
 
+
 class Solution:
     def sumNumbers(self, root: Optional[TreeNode]) -> int:
         def traverse(node: Optional[TreeNode], number: int) -> int:
@@ -42,4 +43,3 @@ class Solution:
         total = 0
         traverse(root, 0)
         return total
-
