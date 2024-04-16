@@ -52,4 +52,3 @@ class Solution:
 
         self.insert_node(node.left, val, depth - 1)
         self.insert_node(node.right, val, depth - 1)
-
