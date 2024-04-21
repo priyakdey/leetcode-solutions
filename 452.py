@@ -43,7 +43,6 @@ class Solution:
             if currStart == prevStart or currStart <= prevEnd:
                 prevStart = prevStart
                 prevEnd = min(prevEnd, currEnd)
-                continue
             else:
                 prevStart = currStart
                 prevEnd = currEnd

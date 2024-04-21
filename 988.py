@@ -34,8 +34,10 @@ class Solution:
                 buffer.pop(0)
                 return
 
-            if node.left is not None : traverse(node.left, buffer)
-            if node.right is not None: traverse(node.right, buffer)
+            if node.left is not None:
+                traverse(node.left, buffer)
+            if node.right is not None:
+                traverse(node.right, buffer)
 
             buffer.pop(0)
 
@@ -45,4 +47,3 @@ class Solution:
             traverse(root, [])
 
         return smallest_string
-
