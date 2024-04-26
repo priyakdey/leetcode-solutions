@@ -5,111 +5,104 @@ Given an integer array nums and an integer k, return the k most frequent
 elements. You may return the answer in any order.
 """
 
-from typing import Dict, List
+from collections import Counter
+from typing import Dict, List, Tuple
 
 
 class MaxHeap:
+
     def __init__(self):
-        self.data = []
+        self.table: List[int] = []
 
-    # HElPERS
-    def parent_index(self, child_index: int) -> int:
-        return (child_index - 1) // 2
+    def push(self, num: int) -> None:
+        self.table.append(num)
 
-    def left_child_index(self, parent_index: int) -> int:
-        return 2 * parent_index + 1
+        curr_index = len(self.table) - 1
 
-    def right_child_index(self, parent_index: int) -> int:
-        return 2 * parent_index + 2
-
-    # END - HElPERS
-
-    def push(self, value: int) -> None:
-        self.data.append(value)
-
-        # now heapify the array from bottom up
-        curr_index = len(self.data) - 1
         while curr_index > 0:
-            parent_index = self.parent_index(curr_index)
-
-            if self.data[curr_index] > self.data[parent_index]:
-                temp = self.data[curr_index]
-                self.data[curr_index] = self.data[parent_index]
-                self.data[parent_index] = temp
+            parent_index = self.get_parent_index(curr_index)
+            if self.table[curr_index] > self.table[parent_index]:
+                self.table[curr_index], self.table[parent_index] = (
+                    self.table[parent_index],
+                    self.table[curr_index],
+                )
+                curr_index = parent_index
             else:
                 break
-
-            curr_index = parent_index
 
     def pop(self) -> int:
-        max_element = self.data[0]
+        if self.is_empty():
+            raise Exception("empty stuff")
 
-        # now heapify the array
-        # copy last element to root
-        self.data[0] = self.data[-1]
-        self.data = self.data[:-1]
+        root = self.table[0]
+        self.table[0] = self.table[-1]
+        self.table.pop()
 
-        # move from top down and swap if necessary
         curr_index = 0
-        while curr_index < len(self.data):
-            left_child_index, right_child_index = self.left_child_index(
-                curr_index
-            ), self.right_child_index(curr_index)
-
-            if left_child_index >= len(self.data):
-                # curr_index = last index
+        length = len(self.table)
+        while curr_index < length:
+            left_index, right_index = self.get_children_index(curr_index)
+            if left_index >= length:
                 break
 
-            # decide which child to swap with if necessary
-            swap_index = left_child_index
+            swap_index = left_index
             if (
-                right_child_index < len(self.data)
-                and self.data[right_child_index] > self.data[left_child_index]
+                right_index < length
+                and self.table[right_index] > self.table[left_index]
             ):
-                swap_index = right_child_index
+                swap_index = right_index
 
-            if self.data[swap_index] > self.data[curr_index]:
-                temp = self.data[swap_index]
-                self.data[swap_index] = self.data[curr_index]
-                self.data[curr_index] = temp
+            if self.table[swap_index] > self.table[curr_index]:
+                self.table[swap_index], self.table[curr_index] = (
+                    self.table[curr_index],
+                    self.table[swap_index],
+                )
+                curr_index = swap_index
             else:
                 break
 
-            curr_index = swap_index
+        return root
 
-        return max_element
+    def is_empty(self) -> bool:
+        return len(self.table) == 0
+
+    def get_parent_index(self, index: int) -> int:
+        return (index - 1) // 2
+
+    def get_children_index(self, index: int) -> Tuple[int, int]:
+        return 2 * index + 1, 2 * index + 2
 
 
 class Solution:
     def topKFrequent(self, nums: List[int], k: int) -> List[int]:
+        freq_count = self.freq_to_element_map(nums)
 
-        # generate the freq map Dict[int, int] {num -> freq}
-        number_freq_map: Dict[int, int] = {}
-        for num in nums:
-            if num in number_freq_map:
-                number_freq_map[num] += 1
+        max_heap = MaxHeap()
+
+        for freq in freq_count.keys():
+            max_heap.push(freq)
+
+        top_freq_elements: List[int] = []
+        while k > 0:
+            freq = max_heap.pop()
+            elements = freq_count[freq]
+            length = len(elements)
+
+            if length <= k:
+                top_freq_elements.extend(elements)
             else:
-                number_freq_map[num] = 1
+                top_freq_elements.extend(elements[:k])
 
-        # lets group the numbers by its freq
-        # this needs to be Dict[int, List[int]]
-        freq_number_map: Dict[int, List[int]] = {}
-
-        for num, count in number_freq_map.items():
-            if count in freq_number_map:
-                freq_number_map[count].append(num)
-            else:
-                freq_number_map[count] = [num]
-
-        heap = MaxHeap()
-        for count in freq_number_map.keys():
-            heap.push(count)
-
-        top_freq_elements = []
-        while k != 0:
-            count = heap.pop()
-            elements = freq_number_map[count]
-            top_freq_elements.extend(elements)
-            k -= len(elements)
+            k -= length
 
         return top_freq_elements
+
+    def freq_to_element_map(self, nums: List[int]) -> Dict[int, List[int]]:
+        element_count = dict(Counter(nums))
+        freq_count = {}
+        for element, freq in element_count.items():
+            if freq not in freq_count:
+                freq_count[freq] = []
+            freq_count[freq].append(element)
+
+        return freq_count

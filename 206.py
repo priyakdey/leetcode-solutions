@@ -20,6 +20,7 @@ class Solution:
     ) -> Optional[ListNode]:
         if curr is None:
             return prev
+
         next_node = curr.next
         curr.next = prev
         return self.reverse_list(next_node, curr)

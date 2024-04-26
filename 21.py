@@ -9,7 +9,7 @@ together the nodes of the first two lists.
 Return the head of the merged linked list.
 """
 
-from typing import Optional
+from typing import Optional, cast
 
 from model import ListNode
 
@@ -65,5 +65,5 @@ class Solution:
             curr2.next = curr1
             curr2 = next_node
 
-        prev = prev.next
+        prev = cast(ListNode, prev.next)
         self.merge(curr1, curr2, prev)
