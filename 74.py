@@ -2,9 +2,9 @@
 74. Search a 2D Matrix
 
 You are given an m x n integer matrix matrix with the following two properties:
+- Each row is sorted in non-decreasing order.
+- The first integer of each row is greater than the last integer of the previous row.
 
-Each row is sorted in non-decreasing order.
-The first integer of each row is greater than the last integer of the previous row.
 Given an integer target, return true if target is in matrix or false otherwise.
 
 You must write a solution in O(log(m * n)) time complexity.
@@ -19,7 +19,7 @@ class Solution:
 
         # check the row
         up, down = 0, rowCount - 1
-        row = None
+        row = -1
         while up <= down:
             mid = up + (down - up) // 2
             if target >= matrix[mid][0] and target <= matrix[mid][-1]:
@@ -31,7 +31,7 @@ class Solution:
             else:
                 up = mid + 1
 
-        if row is None:
+        if row == -1:
             return False
 
         left, right = 0, colCount - 1

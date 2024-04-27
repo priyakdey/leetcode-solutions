@@ -5,42 +5,44 @@ Given the head of a linked list, remove the nth node from the end of the list
 and return its head.
 """
 
-from typing import Optional
+from typing import Optional, Tuple, cast
 
 from model import ListNode
 
 
 class Solution:
     def removeNthFromEnd(self, head: Optional[ListNode], n: int) -> Optional[ListNode]:
-        if head is None:
-            if n == 0:
-                return None
-            raise Exception("not enough nodes to delete")
-        if head.next is None:
-            if n == 1:
-                return None
-            raise Exception("not enough nodes to delete")
+        dummy_head: ListNode = ListNode(-1)
+        dummy_head.next = head
 
+        prev_node, found = self.find_nth_node_from_end(dummy_head, n)
+
+        if not found:
+            raise Exception("not enough node")
+
+        prev_node = cast(ListNode, prev_node)
+        prev_node.next = prev_node.next.next  # type: ignore
+
+        return dummy_head.next
+
+    def find_nth_node_from_end(
+        self, head: ListNode, n: int
+    ) -> Tuple[Optional[ListNode], bool]:
+        """Returns the nth node from the end. If no such node found returns the
+        second value as false
+        """
         tail = head
-        while tail.next is not None and n > 0:
+
+        while tail is not None and n > 0:
             tail = tail.next
             n -= 1
 
-        if n != 0:
-            raise Exception("not enough nodes to delete")
+        if tail is None:
+            return None, False
 
-        prev = None
-        curr = head
+        node = head
         while tail.next is not None:
-            prev = curr
-            curr = curr.next  # type: ignore
+            node = cast(ListNode, node.next)
             tail = tail.next
 
-        if prev is None:
-            # remove the head
-            head = head.next
-        else:
-            prev.next = curr.next  # type: ignore
-            curr = None  # free(*node)
-
-        return head
+        return node, True

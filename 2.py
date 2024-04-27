@@ -10,14 +10,14 @@ number 0 itself.
 
 """
 
-from typing import Optional
+from typing import Optional, cast
 
 from model import ListNode
 
 
 class Solution:
     def addTwoNumbers(self, l1: Optional[ListNode], l2: Optional[ListNode]) -> ListNode:
-        return self.add_two_numbers(l1, l2, 0)
+        return cast(ListNode, self.add_two_numbers(l1, l2, 0))
 
     def add_two_numbers(
         self, curr1: Optional[ListNode], curr2: Optional[ListNode], carry: int

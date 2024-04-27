@@ -39,7 +39,7 @@ class Solution:
         k: int,
     ) -> None:
         if curr is None:
-            attach_to.next = group_head
+            attach_to.next = group_head  # type: ignore
             return
 
         if count == 1:
@@ -53,7 +53,7 @@ class Solution:
             group_tail.next = None
             group_tail = group_head
             group_head = self.reverse_list(group_head, None)
-            attach_to.next = group_head
+            attach_to.next = group_head  # type: ignore
             attach_to = group_tail
             self.traverse(attach_to, next_node, None, 1, k)
 
