@@ -8,6 +8,7 @@ from the root node down to the farthest leaf node.
 """
 
 from typing import Optional
+
 from model import TreeNode
 
 

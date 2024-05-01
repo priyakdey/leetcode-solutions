@@ -5,7 +5,7 @@ Given a string s, find the length of the longest substring without repeating
 characters.
 """
 
-from typing import Dict, List
+from typing import List
 
 
 class Solution:
@@ -15,11 +15,12 @@ class Solution:
         max_length = 0
         for i in range(len(s)):
             ch = s[i]
-            if char_index[ord(ch)] >= start:
+            index = ord(ch)
+            if char_index[index] >= start:
                 length = i - 1 - start + 1
                 max_length = max(max_length, length)
-                start = char_index[ord(ch)] + 1
-            char_index[ord(ch)] = i
+                start = char_index[index] + 1
+            char_index[index] = i
 
         length = len(s) - 1 - start + 1
         max_length = max(max_length, length)

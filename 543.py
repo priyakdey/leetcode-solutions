@@ -10,7 +10,7 @@ The length of a path between two nodes is represented by the number of edges
 between them.
 """
 
-from typing import Optional
+from typing import Optional, cast
 
 from model import TreeNode
 
@@ -20,6 +20,8 @@ class Solution:
 
         def height(node: Optional[TreeNode]) -> int:
             nonlocal max_diameter
+
+            node = cast(TreeNode, node)
 
             if node.left is None and node.right is None:
                 return 0
