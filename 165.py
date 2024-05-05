@@ -39,12 +39,12 @@ class Solution:
             cursor = 0
             while cursor < len(version):
                 if version[cursor] == ".":
-                    token = atoi(version[start : cursor].strip())
+                    token = atoi(version[start:cursor].strip())
                     tokens.append(token)
                     start = cursor + 1
                 cursor += 1
 
-            token = atoi(version[start : cursor].strip())
+            token = atoi(version[start:cursor].strip())
             if token != 0:
                 tokens.append(token)
             return tokens
@@ -69,4 +69,3 @@ class Solution:
             curr += 1
 
         return 0
-
