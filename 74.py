@@ -15,10 +15,10 @@ from typing import List
 
 class Solution:
     def searchMatrix(self, matrix: List[List[int]], target: int) -> bool:
-        rowCount, colCount = len(matrix), len(matrix[0])
+        rows, cols = len(matrix), len(matrix[0])
 
         # check the row
-        up, down = 0, rowCount - 1
+        up, down = 0, rows - 1
         row = -1
         while up <= down:
             mid = up + (down - up) // 2
@@ -34,7 +34,7 @@ class Solution:
         if row == -1:
             return False
 
-        left, right = 0, colCount - 1
+        left, right = 0, cols - 1
         while left <= right:
             mid = left + (right - left) // 2
             if target == matrix[row][mid]:

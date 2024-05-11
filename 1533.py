@@ -8,9 +8,10 @@ which have the following functions:
 
 - int compareSub(int l, int r, int x, int y): 
   where 0 <= l, r, x, y < ArrayReader.length(), l <= r and x <= y. 
-  The function compares the sum of sub-array arr[l..r] with the sum of the sub-array arr[x..y] and returns:
-    - 1 if arr[l]+arr[l+1]+...+arr[r] > arr[x]+arr[x+1]+...+arr[y].
-    - 0 if arr[l]+arr[l+1]+...+arr[r] == arr[x]+arr[x+1]+...+arr[y].
+  The function compares the sum of sub-array arr[l..r] with the sum of the 
+  sub-array arr[x..y] and returns:
+    -  1 if arr[l]+arr[l+1]+...+arr[r] > arr[x]+arr[x+1]+...+arr[y].
+    -  0 if arr[l]+arr[l+1]+...+arr[r] == arr[x]+arr[x+1]+...+arr[y].
     - -1 if arr[l]+arr[l+1]+...+arr[r] < arr[x]+arr[x+1]+...+arr[y].
 
 - int length(): Returns the size of the array.
@@ -28,7 +29,7 @@ class ArrayReader(object):
     You should not implement it, or speculate about its implementation
     """
 
-    def compareSub(self, l: int, r: int, x: int, y: int) -> int:
+    def compareSub(self, l: int, r: int, x: int, y: int) -> int:  # type: ignore
         """
         Compares the sum of arr[l..r] with the sum of arr[x..y]
             return 1 if sum(arr[l..r]) > sum(arr[x..y])
@@ -37,16 +38,43 @@ class ArrayReader(object):
         """
         pass
 
-    def length(self) -> int:
+    def length(self) -> int:  # type: ignore
         """
         Returns the length of the array
         """
         pass
 
 
-# TODO: Complete this
-
-
 class Solution:
     def getIndex(self, reader: "ArrayReader") -> int:
-        pass
+        left, right = 0, reader.length() - 1
+
+        index = -1
+
+        while left <= right:
+            slice_length = right - left + 1
+            mid = left + (right - left) // 2
+
+            if slice_length & 1 == 0:
+                compare_sub = reader.compareSub(left, mid, mid + 1, right)
+                if compare_sub == 1:
+                    right = mid
+                elif compare_sub == -1:
+                    left = mid + 1
+                else:
+                    # should never hit this if slice length is even
+                    raise Exception("something went wrong")
+            else:
+                if left == right:
+                    index = mid
+                    break
+                compare_sub = reader.compareSub(left, mid - 1, mid + 1, right)
+                if compare_sub == 1:
+                    right = mid - 1
+                elif compare_sub == -1:
+                    left = mid + 1
+                else:
+                    index = mid
+                    break
+
+        return index

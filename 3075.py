@@ -21,12 +21,12 @@ from typing import List
 class Solution:
     def maximumHappinessSum(self, happiness: List[int], k: int) -> int:
         happiness.sort(reverse=True)
-        cursor  = 0
+        cursor = 0
         max_happiness = 0
-        
+
         while cursor < k and happiness[cursor] - cursor > 0:
             value = happiness[cursor]
             max_happiness += value - cursor
             cursor += 1
-        
+
         return max_happiness
