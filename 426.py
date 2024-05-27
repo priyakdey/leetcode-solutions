@@ -15,8 +15,7 @@ You should return the pointer to the smallest element of the linked list.
 """
 
 from collections import deque
-from turtle import st
-from typing import Optional
+from typing import Optional, cast
 
 
 class Node:
@@ -62,10 +61,10 @@ class Solution:
                 stack.append(child)
                 child = child.left
 
-        tail: Node = head
+        tail: Node = cast(Node, head)
         while tail.right is not None:
             tail = tail.right
 
         tail.right = head
-        head.left = tail
+        cast(Node, head).left = tail
         return head

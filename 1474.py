@@ -29,24 +29,20 @@ class Solution:
 
         dummy_head = ListNode(-1)
         dummy_head.next = head
-        attach_to = dummy_head
-
-        curr = head
+        prev, curr = dummy_head, head
 
         while curr is not None:
-            group_head = curr
-            count = m
-            while curr.next is not None and count > 1:
+            _m = m
+            while curr is not None and _m > 0:
+                prev.next = curr
+                prev = curr
                 curr = curr.next
-                count -= 1
-            m_node = curr
+                _m -= 1
 
-            count = n
-            while curr.next is not None and count > 1:
+            _n = n
+            while curr is not None and _n > 0:
                 curr = curr.next
-                count -= 1
-            attach_to.next = group_head
-            attach_to = m_node
-            curr = curr.next
+                _n -= 1
 
+        prev.next = None
         return dummy_head.next

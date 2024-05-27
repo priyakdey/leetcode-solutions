@@ -40,7 +40,7 @@ class Solution:
             curr = curr.next
 
         if carry == 1:
-            tail.next = ListNode(1)
+            tail.next = ListNode(1)  # type: ignore
 
         return self.reverse_list(head)
 
@@ -52,4 +52,4 @@ class Solution:
             prev = curr
             curr = next_node
 
-        return prev
+        return prev  # type: ignore
