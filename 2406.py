@@ -20,23 +20,27 @@ from typing import List
 class Solution:
     def minGroups(self, intervals: List[List[int]]) -> int:
         intervals.sort(key=lambda x: (x[0], x[1]))
-        print(intervals)
-        groups = 0
 
-        for i in range(len(intervals)):
-            if intervals[i][0] < 0:
-                continue
+        groups: List[List[int]] = [intervals[0]]
+        # print(intervals)
 
-            intervals[i][0] *= 1
-            last_end_time = intervals[i][1]
-            for j in range(len(intervals)):
-                start_time, end_time = intervals[j]
-                if start_time < 0:
-                    continue
-                if start_time > last_end_time:
-                    intervals[j][0] *= -1
-                    last_end_time = intervals[j][1]
+        for i in range(1, len(intervals)):
+            start, end = intervals[i]
+            left, right = 0, len(groups) - 1
+            index = -1
+            while left <= right:
+                mid = left + (right - left) // 2
+                if start >= groups[mid][1]:
+                    index = mid
+                    left = mid + 1
+                else:
+                    right = mid - 1
 
-            groups += 1
+            if index == -1:
+                groups.append([start, end])
+            else:
+                groups[index][1] = end
 
-        return groups
+        # print(groups)
+
+        return len(groups)
