@@ -91,7 +91,7 @@ class Solution:
         pq = PriorityQueue(k)
 
         for point in points:
-            distance = self.calc_distance(point)
+            distance = self.calc_sq_distance(point)
             print(point, distance)
             if pq.is_full():
                 if distance < pq.peek()[1]:
@@ -109,6 +109,6 @@ class Solution:
 
         return closest_points
 
-    def calc_distance(self, point: List[int]) -> int:
+    def calc_sq_distance(self, point: List[int]) -> int:
         [x, y] = point
         return x**2 + y**2

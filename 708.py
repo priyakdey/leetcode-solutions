@@ -14,7 +14,7 @@ single circular list and return the reference to that single
 node. Otherwise, you should return the originally given node.
 """
 
-from typing import Optional, cast
+from typing import Optional, Tuple, cast
 
 
 class Node:
@@ -27,29 +27,45 @@ class Node:
 
 class Solution:
     def insert(self, head: "Optional[Node]", insertVal: int) -> "Node":
-        if head is None:
-            return Node(insertVal)
-
-        curr = head
         node = Node(insertVal)
-
-        max_node = head
-        min_node = head
-
-        curr = head
-        while curr.next is not head:
-            if curr.val > max_node.val:
-                max_node = curr
-            if curr.val < min_node.val:
-                min_node = curr
-            curr = curr.next
+        if head is None:
+            head = node
+            head.next = head
+        elif head.next == head:
+            head.next = node
+            node.next = head
+        else:
+            min_node, max_node = self.find_max_min_node(head)
+            if min_node == max_node:
+                next_node = head.next
+                head.next = node
+                node.next = next_node
+            else:
+                dummy_head = Node(1)
+                dummy_head.next = min_node
+                prev = dummy_head
+                curr = min_node
+                while curr is not None:
+                    if curr.val >= insertVal:  # type: ignore
+                        break
+                    prev = prev.next  # type: ignore
+                    curr = curr.next
+                prev.next = node  # type: ignore
+                node.next = curr
+                max_node.next = dummy_head.next
 
         return head
 
+    def find_max_min_node(self, head: "Node") -> Tuple["Node", "Node"]:
+        min_node, max_node = head, head
+        curr = head.next
 
-head = Node(3)
-head.next = Node(5)
-head.next.next = Node(1)
-head.next.next.next = head
+        while curr != head:
+            if curr.val <= min_node.val:  # type: ignore
+                min_node = curr
+            if curr.val >= max_node.val:  # type: ignore
+                max_node = curr
 
-Solution().insert(head, 0)
+            curr = cast(Node, curr).next
+
+        return cast(Node, min_node), cast(Node, max_node)

@@ -26,6 +26,8 @@ class Node:
         self.next = next
         self.child = child
 
+
 class Solution:
-    def flatten(self, head: 'Optional[Node]') -> 'Optional[Node]':
-        
+    def flatten(self, head: "Optional[Node]") -> "Optional[Node]":
+        # TODO
+        pass

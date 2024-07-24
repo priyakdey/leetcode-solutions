@@ -44,15 +44,20 @@ class Solution:
         return "".join(buffer)
 
     def add(self, a: str, b: str, c: str) -> Tuple[str, str]:
-        # fmt: off
-        if a == "0" and b == "0" and c == "0": return ("0", "0")
-        if a == "0" and b == "0" and c == "1": return ("0", "1")
-        if a == "0" and b == "1" and c == "0": return ("0", "1")
-        if a == "0" and b == "1" and c == "1": return ("1", "0")
-        if a == "1" and b == "0" and c == "0": return ("0", "1")
-        if a == "1" and b == "0" and c == "1": return ("1", "0")
-        if a == "1" and b == "1" and c == "0": return ("1", "0")
-        if a == "1" and b == "1" and c == "1": return ("1", "1")
-        
+        if a == "0" and b == "0" and c == "0":
+            return "0", "0"
+        if a == "0" and b == "0" and c == "1":
+            return "0", "1"
+        if a == "0" and b == "1" and c == "0":
+            return "0", "1"
+        if a == "0" and b == "1" and c == "1":
+            return "1", "0"
+        if a == "1" and b == "0" and c == "0":
+            return "0", "1"
+        if a == "1" and b == "0" and c == "1":
+            return "1", "0"
+        if a == "1" and b == "1" and c == "0":
+            return "1", "0"
+        if a == "1" and b == "1" and c == "1":
+            return "1", "1"
         raise Exception("invalid input")
-        # fmt: on
