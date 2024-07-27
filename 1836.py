@@ -8,6 +8,7 @@ Return the linked list after the deletions.
 """
 
 from typing import Dict
+
 from model import ListNode
 
 
