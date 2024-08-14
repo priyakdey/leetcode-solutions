@@ -14,8 +14,8 @@ you need to do the following things:
   of nums are not important as well as the size of nums.
 - Return k.
 
-Custom Judge:
 
+Custom Judge:
 The judge will test your solution with the following code:
 
 int[] nums = [...]; // Input array

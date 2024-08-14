@@ -19,17 +19,21 @@ class Solution:
     def findMissingRanges(
         self, nums: List[int], lower: int, upper: int
     ) -> List[List[int]]:
+        missing: List[int] = []
+
+        for num in range(lower, upper + 1):
+            if num not in nums:
+                missing.append(num)
+
         missing_ranges: List[List[int]] = []
-        distinct: Set[int] = set(nums)
+        if len(missing) == 0:
+            return missing_ranges
 
-        lower_range = lower
-        while lower_range <= upper:
-            if lower_range not in nums:
-                upper_range = lower_range
-                while upper_range not in distinct and upper_range <= upper:
-                    upper_range += 1
-                missing_ranges.append([lower_range, upper_range - 1])
-                lower_range = upper_range
-            lower_range += 1
+        start = missing[0]
+        for i in range(1, len(missing)):
+            if missing[i] != missing[i - 1] + 1:
+                missing_ranges.append([start, missing[i - 1]])
+                start = missing[i]
 
+        missing_ranges.append([start, missing[-1] + 1])
         return missing_ranges

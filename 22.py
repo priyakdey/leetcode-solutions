@@ -15,7 +15,8 @@ class Solution:
         return combinations
 
     def generate_parenthesis(
-        self, open: int, closed: int, n: int, buffer: List[str], combinations: List[str]
+            self, open: int, closed: int, n: int, buffer: List[str],
+            combinations: List[str]
     ) -> None:
         if open == closed:
             if open == n:
@@ -23,12 +24,14 @@ class Solution:
                 return
             else:
                 buffer.append("(")
-                self.generate_parenthesis(open + 1, closed, n, buffer, combinations)
+                self.generate_parenthesis(open + 1, closed, n, buffer,
+                                          combinations)
                 buffer.pop()
         else:
             if open < n:
                 buffer.append("(")
-                self.generate_parenthesis(open + 1, closed, n, buffer, combinations)
+                self.generate_parenthesis(open + 1, closed, n, buffer,
+                                          combinations)
                 buffer.pop()
 
             buffer.append(")")
