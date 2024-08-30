@@ -36,15 +36,18 @@ from typing import List
 class Solution:
     def removeDuplicates(self, nums: List[int]) -> int:
         if nums is None or len(nums) == 0:
-            raise Exception("invalid input")
+            raise Exception("invalid arguments")
 
-        last_unique_value = nums[0]
-        insert_at = 1
+        curr, insert_at = 0, 0
+        last_uniq_element = nums[0]
 
-        for i in range(1, len(nums)):
-            if nums[i] != last_unique_value:
-                nums[insert_at] = nums[i]
-                last_unique_value = nums[i]
+        while curr < len(nums):
+            if nums[curr] != last_uniq_element:
+                nums[insert_at] = last_uniq_element
                 insert_at += 1
+                last_uniq_element = nums[curr]
+            curr += 1
 
-        return insert_at
+        nums[insert_at] = last_uniq_element
+        return insert_at + 1
+

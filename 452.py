@@ -20,33 +20,24 @@ from typing import List
 
 
 class Solution:
-    def findMinArrowShots(self, points: List[List[int]]) -> int:
-        if len(points) == 1:
-            return 1
+    class Solution:
+        def findMinArrowShots(self, points: List[List[int]]) -> int:
+            points.sort(key=lambda x: (x[0], x[1]))
 
-        points.sort(key=lambda arr: (arr[0], arr[1]))
-        return self.fake_merge(points)
+            prev_start = points[0][0]
+            prev_end = points[0][1]
+            arrows = 1
 
-    def fake_merge(self, points: List[List[int]]) -> int:
-        """Does not actually merge, but returns the count of total interval
-        if merge of overlapping positions did happen"""
-        count = 1
-        cursor = 0
+            for i in range(1, len(points)):
+                curr_start = points[i][0]
+                curr_end = points[i][1]
 
-        prevStart = points[cursor][0]
-        prevEnd = points[cursor][1]
+                if curr_start <= prev_end:
+                    prev_start = max(curr_start, prev_start)
+                    prev_end = min(curr_end, prev_end)
+                else:
+                    prev_start = curr_start
+                    prev_end = curr_end
+                    arrows += 1
 
-        for i in range(1, len(points)):
-            currStart = points[i][0]
-            currEnd = points[i][1]
-
-            if currStart == prevStart or currStart <= prevEnd:
-                prevStart = prevStart
-                prevEnd = min(prevEnd, currEnd)
-            else:
-                prevStart = currStart
-                prevEnd = currEnd
-                cursor += 1
-                count += 1
-
-        return count
+            return arrows

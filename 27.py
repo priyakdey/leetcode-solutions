@@ -31,36 +31,17 @@ for (int i = 0; i < actualLength; i++) {
 }
 If all assertions pass, then your solution will be accepted.
 """
-
 from typing import List
 
 
 class Solution:
     def removeElement(self, nums: List[int], val: int) -> int:
-        if nums is None:
-            raise Exception("invalid input")
+        curr, swap_at = 0, 0
 
-        length = len(nums)
-        if length == 0:
-            return 0
-        if length == 1:
-            return 1 if nums[0] != val else 0
+        while curr < len(nums):
+            if nums[curr] != val:
+                nums[swap_at] = nums[curr]
+                swap_at += 1
+            curr += 1
 
-        left, right = 0, length - 1
-        while left < right:
-            if nums[left] == val and nums[right] == val:
-                right -= 1
-            elif nums[left] == val and nums[right] != val:
-                nums[left], nums[right] = nums[right], nums[left]
-                left += 1
-                right -= 1
-            elif nums[left] != val and nums[right] == val:
-                left += 1
-                right -= 1
-            elif nums[left] != val and nums[right] != val:
-                left += 1
-
-        if nums[left] == val:
-            return left
-        else:
-            return left + 1
+        return swap_at

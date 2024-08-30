@@ -26,22 +26,22 @@ class Solution:
         if len(nums) == 1:
             return [str(nums[0])]
 
-        start, end = nums[0], nums[0]
-        ranges = []
-        for i in range(1, len(nums)):
-            if nums[i] - nums[i - 1] == 1:
-                end = nums[i]
-                continue
-            else:
-                if start == end:
-                    ranges.append(str(start))
-                else:
-                    ranges.append(str(start) + "->" + str(end))
-                start, end = nums[i], nums[i]
+        ranges: List[str] = []
 
-        if start == end:
-            ranges.append(str(start))
+        start = 0
+        for curr in range(1, len(nums)):
+            if nums[curr] != nums[curr - 1] + 1:
+                length = curr - 1 - start + 1
+                if length == 1:
+                    ranges.append(str(nums[start]))
+                else:
+                    ranges.append(f"{str(nums[start])}->{str(nums[curr - 1])}")
+                start = curr
+
+        length = len(nums) - start
+        if length == 1:
+            ranges.append(str(nums[start]))
         else:
-            ranges.append(str(start) + "->" + str(end))
+            ranges.append(f"{str(nums[start])}->{str(nums[-1])}")
 
         return ranges

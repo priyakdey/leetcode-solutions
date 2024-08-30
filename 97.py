@@ -19,42 +19,51 @@ Note: a + b is the concatenation of strings a and b.
 
 """
 
-from typing import List
+from typing import List, Optional
 
 
 class Solution:
     def isInterleave(self, s1: str, s2: str, s3: str) -> bool:
+        def can_interleave(
+            index1: int,
+            index2: int,
+            index3: int,
+            cache: List[List[List[Optional[bool]]]],
+        ) -> bool:
+            nonlocal len1, len2, len3
 
-        def _is_interleave(index1: int, index2: int, index3: int) -> bool:
-            if index1 == len(s1) and index2 == len(s2):
-                return index3 == len(s3)
-            if index1 == len(s1):
+            if index3 == len3:
+                return True
+            if index1 == len1:
                 return s2[index2:] == s3[index3:]
-            if index2 == len(s2):
+            if index2 == len2:
                 return s1[index1:] == s3[index3:]
 
             if cache[index1][index2][index3] is not None:
                 return cache[index1][index2][index3]
 
-            is_interleaving = False
+            interleave: bool = False
 
             if s1[index1] == s3[index3]:
-                is_interleaving = is_interleaving or _is_interleave(
-                    index1 + 1, index2, index3 + 1
+                interleave = interleave or can_interleave(
+                    index1 + 1, index2, index3 + 1, cache
                 )
+
             if s2[index2] == s3[index3]:
-                is_interleaving = is_interleaving or _is_interleave(
-                    index1, index2 + 1, index3 + 1
+                interleave = interleave or can_interleave(
+                    index1, index2 + 1, index3 + 1, cache
                 )
 
-            cache[index1][index2][index3] = is_interleaving
-            return is_interleaving
+            cache[index1][index2][index3] = interleave
+            return interleave
 
-        if len(s1) + len(s2) != len(s3):
+        len1, len2, len3 = len(s1), len(s2), len(s3)
+
+        if len1 + len2 != len3:
             return False
 
-        cache: List[List[List[bool]]] = [
-            [[None for _ in range(len(s3) + 1)] for _ in range(len(s2) + 1)]
-            for _ in range(len(s1) + 1)
-        ]  # type: ignore
-        return _is_interleave(0, 0, 0)
+        cache: List[List[List[Optional[bool]]]] = [
+            [[None for _ in range(len3 + 1)] for _ in range(len2 + 1)]
+            for _ in range(len1 + 1)
+        ]
+        return can_interleave(0, 0, 0, cache)

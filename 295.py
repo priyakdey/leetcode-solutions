@@ -16,16 +16,47 @@ Implement the MedianFinder class:
   Answers within 10-5 of the actual answer will be accepted.
 """
 
-# TODO: Complete this
+from heapq import heappop, heappush
+from typing import List
 
 
 class MedianFinder:
 
     def __init__(self):
-        pass
+        self.left: List[int] = []
+        self.right: List[int] = []
+        self.median: float = 0.0
 
     def addNum(self, num: int) -> None:
-        pass
+        if num <= self.median:
+            heappush(self.left, -num)
+        else:
+            heappush(self.right, num)
+
+        self.balance()
+        self.setMedian()
 
     def findMedian(self) -> float:
-        pass
+        return self.median
+
+    def balance(self) -> None:
+        if (
+            len(self.left) == len(self.right)
+            or abs(len(self.left) - len(self.right)) == 1
+        ):
+            return
+
+        if len(self.left) > len(self.right):
+            num = -heappop(self.left)
+            heappush(self.right, num)
+        else:
+            num = heappop(self.right)
+            heappush(self.left, -num)
+
+    def setMedian(self) -> None:
+        if len(self.left) > len(self.right):
+            self.median = float(-self.left[0])
+        elif len(self.left) < len(self.right):
+            self.median = float(self.right[0])
+        else:
+            self.median = (-self.left[0] + self.right[0]) / 2

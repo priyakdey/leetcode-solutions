@@ -104,28 +104,3 @@ class LRUCache:
             curr = curr.next
 
         return f'table = {self.kvs} | nodes = {" <-> ".join(buffer)} | size = {self.capacity}'
-
-
-# ["LRUCache","put","put","get","put","get","put","get","get","get"]
-# [[2],        [1,1],[2,2],[1], [3,3], [2], [4,4], [1], [3],  [4]]
-
-# cache = LRUCache(2)
-# print(cache)
-# cache.put(1, 1)
-# print(cache)
-# cache.put(2, 2)
-# print(cache)
-# cache.get(1)
-# print(cache)
-# cache.put(3, 3)
-# print(cache)
-# cache.get(2)
-# print(cache)
-# cache.put(4, 4)
-# print(cache)
-# cache.get(1)
-# print(cache)
-# cache.get(3)
-# print(cache)
-# cache.get(4)
-# print(cache)

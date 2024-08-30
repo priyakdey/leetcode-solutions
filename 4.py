@@ -33,36 +33,36 @@ class Solution:
 
         i, j, curr = 1, 0, 0
         mid = (m + n) // 2
-        midElement = nums1[0]
+        mid_element = nums1[0]
 
         if nums1[0] > nums2[0]:
             i, j = 0, 1
-            midElement = nums2[0]
+            mid_element = nums2[0]
 
-        prevElement = -1  # For length == -1, this won't change.
+        prev_element = -1  # For length == -1, this won't change.
         while i < m and j < n and curr < mid:
-            prevElement = midElement
+            prev_element = mid_element
             if nums1[i] <= nums2[j]:
-                midElement = nums1[i]
+                mid_element = nums1[i]
                 i += 1
             else:
-                midElement = nums2[j]
+                mid_element = nums2[j]
                 j += 1
             curr += 1
 
         while i < m and curr < mid:
-            prevElement = midElement
-            midElement = nums1[i]
+            prev_element = mid_element
+            mid_element = nums1[i]
             i += 1
             curr += 1
 
         while j < n and curr < mid:
-            prevElement = midElement
-            midElement = nums2[j]
+            prev_element = mid_element
+            mid_element = nums2[j]
             j += 1
             curr += 1
 
         if (m + n) % 2 == 0:
-            return (midElement + prevElement) / 2
+            return (mid_element + prev_element) / 2
         else:
-            return midElement
+            return mid_element
