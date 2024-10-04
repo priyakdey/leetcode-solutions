@@ -21,17 +21,4 @@ INT_MAX, INT_MIN = (1 << 31) - 1, -(1 << 31)
 
 class Solution:
     def divide(self, dividend: int, divisor: int) -> int:
-        positive: bool = (dividend > 0 and divisor > 0) or (
-            dividend < 0 and divisor < 0
-        )
-        dividend = abs(dividend) if dividend != INT_MIN else INT_MAX
-        divisor = abs(divisor) if divisor != INT_MIN else INT_MAX
-
         quotient: int = 0
-
-        for i in range(31, -1, -1):
-            if divisor << i <= dividend:
-                dividend -= divisor << i
-                quotient += 1 << i
-
-        return quotient if positive else -quotient

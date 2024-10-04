@@ -23,11 +23,11 @@ from typing import Dict, List
 class Solution:
     def findSubstring(self, s: str, words: List[str]) -> List[int]:
         def to_freq_map(
-            s: str, start: int, end: int, word_length: int
+                s: str, start: int, end: int, word_length: int
         ) -> Dict[str, int]:
             freq_map: Dict[str, int] = defaultdict(int)
             for i in range(start, end, word_length):
-                freq_map[s[i : i + word_length]] += 1
+                freq_map[s[i: i + word_length]] += 1
             return freq_map
 
         def is_map_equal(map1: Dict[str, int], map2: Dict[str, int]) -> bool:

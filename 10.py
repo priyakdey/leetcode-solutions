@@ -14,9 +14,16 @@ The matching should cover the entire input string (not partial).
 class Solution:
     def isMatch(self, string: str, pattern: str) -> bool:
         def is_match(i: int, j: int) -> bool:
-            if j < len(pattern) - 1 and pattern[j + 1] == "*":
-                return is_match(i, j + 1)
-            elif pattern[j] == "*":
-                k = i
-                while k < len(string) and string[k] == pattern[k - 1]
+            if j == len(pattern):
+                return i == len(string)
 
+            match = i < len(string) and (string[i] == pattern[j] or pattern[j] == ".")
+
+            if j < len(pattern) - 1 and pattern[j + 1] == "*":
+                match = is_match(i, j + 2) or (match and is_match(i + 1, j))
+            else:
+                match = match and is_match(i + 1, j + 1)
+
+            return match
+
+        return is_match(0, 0)
