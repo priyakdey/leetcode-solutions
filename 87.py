@@ -19,4 +19,22 @@ scrambled string of s1, otherwise, return false.
 
 class Solution:
     def isScramble(self, s1: str, s2: str) -> bool:
-        pass
+        def scramble(s: str) -> str:
+            nonlocal s1
+
+            if len(s) == 1:
+                return s
+
+            can_scramble: bool = False
+
+            for i in range(1, len(s)):
+                left, right = s[:i], s[i:]
+                left = scramble(left)
+                right = scramble(right)
+                if left + right == s1 or right + left == s1:
+                    can_scramble = True
+
+            return can_scramble
+
+
+
