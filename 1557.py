@@ -7,12 +7,11 @@ class Solution:
         incoming: List[bool] = [False] * n
 
         for [src, dest] in edges:
-            incoming[dest] = True 
-        
+            incoming[dest] = True
+
         result: List[int] = []
         for i, has_incoming in enumerate(incoming):
             if not has_incoming:
                 result.append(i)
 
         return result
-

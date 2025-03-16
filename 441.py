@@ -10,4 +10,3 @@ class Solution:
             else:
                 right = mid - 1
         return x
-

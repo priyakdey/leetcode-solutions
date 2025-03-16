@@ -2,12 +2,12 @@
 # This is ArrayReader's API interface.
 # You should not implement it, or speculate about its implementation
 # """
-#class ArrayReader:
+# class ArrayReader:
 #    def get(self, index: int) -> int:
 
 
 class Solution:
-    def search(self, reader: 'ArrayReader', target: int) -> int:
+    def search(self, reader: "ArrayReader", target: int) -> int:
         left, right = 0, 1
         while target > reader.get(right):
             right = right << 1
@@ -23,4 +23,3 @@ class Solution:
                 left = mid + 1
 
         return -1
-

@@ -6,9 +6,9 @@ class Solution:
         pizzas.sort(reverse=True)
         length = len(pizzas)
         days = length // 4
-        odd_days = days // 2 if days & 1 == 0 else days // 2 + 1 
-        even_days = days - odd_days 
-        
+        odd_days = days // 2 if days & 1 == 0 else days // 2 + 1
+        even_days = days - odd_days
+
         max_weight: int = 0
         print(pizzas)
         cursor = 0
@@ -22,5 +22,4 @@ class Solution:
             max_weight += pizzas[cursor + 1]
             cursor += 2
 
-        return max_weight 
-
+        return max_weight
