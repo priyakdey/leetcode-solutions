@@ -1,0 +1,12 @@
+#!/bin/bash
+
+
+black *.py
+return_code=`echo $?`
+
+if [[ $return_code != 0 ]]; then
+    echo "Fix python errors !!!"
+    exit 1
+fi
+
+
